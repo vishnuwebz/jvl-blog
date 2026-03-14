@@ -11,8 +11,8 @@ def index(request):
     return render(request, "blog/index.html", context)
 
 
-def detail(request, post_id: int):
-    post = get_object_or_404(Post, id=post_id)
+def detail(request, slug: str):
+    post = get_object_or_404(Post, slug=slug)
     context = {
         "post": post,
         "blog_title": post.title,

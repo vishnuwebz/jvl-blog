@@ -14,7 +14,7 @@
                         <p>
                             {{ post.excerpt|truncatewords:20 }}
                         </p>
-                        <a href="{% url 'blog:detail' post_id=post.id %}">
+                        <a href="{% url 'blog:detail' slug=post.slug %}">
                             Read More &raquo;
                         </a>
                     </article>
