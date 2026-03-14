@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import Http404
+
 
 POSTS = [
     {
@@ -32,29 +33,19 @@ def index(request):
     }
     return render(request, "blog/index.html", context)
 
-# def detail(request, post_id: int):
-#     post = get_object_or_404(
-#         POSTS,
-#         id=post_id,  # type: ignore[arg-type]
-#     )
-#     context = {
-#         "post": post,
-#         "blog_title": post["title"],
-#     }
-#     return render(request, "blog/detail.html", context)
 
 def detail(request, post_id: int):
-    post = None
-    for p in POSTS:
-        if p["id"] == post_id:
-            post = p
-            break
-    if post is None:
-        from django.http import Http404
-        raise Http404("Post not found")
+    post = get_post_or_404(post_id)
 
     context = {
         "post":post,
         "blog_title": post["title"],
     }
     return render(request, "blog/detail.html", context)
+
+def get_post_or_404(post_id: int):
+    """ Simple helper until we switch to models."""
+    for post in POSTS:
+        if post["id"] == post_id:
+            return post
+    raise Http404("Post not found")
