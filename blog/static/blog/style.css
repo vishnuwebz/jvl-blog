@@ -77,3 +77,29 @@ main.container {
 .post-card a:hover {
     text-decoration: underline;
 }
+
+
+.pagination-nav {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.pagination {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pagination li a {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #00070f3;
+}
+
+.pagination li a:hover {
+    background-color: #0f0f0;
+}

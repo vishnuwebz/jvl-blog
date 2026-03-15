@@ -6,11 +6,11 @@
     <section>
         <h2>{{ blog_title|default:"Latest Posts" }}</h2>
 
-        {% if posts %}
+        {% if page_obj.object_list %}
             <div class="posts-grid">
-                {% for post in posts %}
+                {% for post in page_obj.object_list %}
                     <article class="post-card">
-                        <h3>{{ post.title }}</h3>
+                       <h3>{{ post.title }}</h3>
                         <p>
                             {{ post.excerpt|truncatewords:20 }}
                         </p>
@@ -21,7 +21,36 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p>No posts available.</p>
+            <p>No posts available</p>
         {% endif %}
     </section>
+    <nav aria-label="Post pagination" class="pagination-nav">
+        {% if page_obj.paginator.num_pages > 1 %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li>
+                        <a href="?page=1">&laquo; First</a>
+                    </li>
+                    <li>
+                        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <li>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li>
+                        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    <li>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </nav>
+
+
 {% endblock %}
