@@ -11,6 +11,13 @@
                 {% for post in page_obj.object_list %}
                     <article class="post-card">
                        <h3>{{ post.title }}</h3>
+                        {% if post.categories.all %}
+                            <p class="post-meta">
+                                {% for category in post.categories.all %}
+                                    <span class="badge badge-category">{{ category.name }}</span>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
                         <p>
                             {{ post.excerpt|truncatewords:20 }}
                         </p>

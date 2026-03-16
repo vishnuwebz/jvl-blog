@@ -103,3 +103,22 @@ main.container {
 .pagination li a:hover {
     background-color: #0f0f0;
 }
+
+
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.badge-category {
+    background-color: #e0f2ff;
+    color: #0055aa;
+}
+
+.badge-tag {
+    background-color: #f0f0f0;
+    color: #555;
+}

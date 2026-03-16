@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ blog_title }}{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>{{ blog_title }}</h2>
+
+        {% if posts %}
+            <p>Showing {{ posts|length }} post{{ posts|length|pluralize }} in category "{{ category.name }}".</p>
+
+            <div class="posts-grid">
+                {% for post in posts %}
+                    <article class="post-card">
+                        <h3>{{ post.title }}</h3>
+
+                        {% if post.categories.all %}
+                            <p class="post-meta">
+                                {% for cat in post.categories.all %}
+                                    <span class="badge badge-category">{{ cat.name }}</span>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+
+                        <p>
+                            {{ post.excerpt|truncatewords:20 }}
+                        </p>
+                        <a href="{% url 'blog:detail' slug=post.slug %}">
+                            Read More &raquo;
+                        </a>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No posts found in this category.</p>
+        {% endif %}
+
+        <p style="margin-top: 16px;">
+            <a href="{% url 'blog:index' %}">&laquo; Back to all posts</a>
+        </p>
+    </section>
+{% endblock %}

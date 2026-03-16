@@ -6,4 +6,6 @@ app_name = "blog" # allows namespacing in templates (blog:index, blog:detail).
 urlpatterns = [
     path("", views.index, name="index"),
     path("post/<slug:slug>/", views.detail, name="detail"),
+    path("category/<slug:category_slug>/", views.posts_by_category, name="posts_by_category"),
+    path("tag/<slug:tag_slug>/", views.posts_by_tag, name="posts_by_tag"),
 ]

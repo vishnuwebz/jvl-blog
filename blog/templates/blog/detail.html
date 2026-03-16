@@ -5,9 +5,40 @@
 {% block content %}
     <article>
         <h2>{{ post.title }}</h2>
+
         <p class="post-meta">
             Published on {{ post.created_at }}
         </p>
+
+        {% if post.categories.all %}
+            <p class="post-meta">
+                Categories:
+                {% for category in post.categories.all %}
+                    <a href="{% url 'blog:posts_by_category' category_slug=category.slug %}"
+                       class="badge badge-category">
+                        {{ category.name }}
+                    </a>
+                {% empty %}
+                    <span>No categories</span>
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        {% if post.tags.all %}
+        <p class="post-meta">
+            Tags:
+            {% for tag in post.tags.all %}
+                <a href="{% url 'blog:posts_by_tag' tag_slug=tag.slug %}"
+                   class="badge badge-tag">
+                    #{{ tag.name }}
+                </a>
+            {% empty %}
+                <span>No tags</span>
+            {% endfor %}
+        </p>
+    {% endif %}
+
+
         <p>
             {{ post.excerpt }}
         </p>
@@ -19,4 +50,5 @@
             <a href="{% url 'blog:index' %}">&laquo; Back to all posts</a>
         </p>
     </article>
+
 {% endblock %}
